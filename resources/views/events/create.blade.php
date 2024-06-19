@@ -134,7 +134,7 @@
                         @enderror
                     </div>
                 </div>
-                {{-- <div>
+                <div>
                     <h3 class="mb-4 font-semibold text-gray-900 dark:text-white">Tags</h3>
                     <ul
                         class="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white">
@@ -150,7 +150,7 @@
                             </li>
                         @endforeach
                     </ul>
-                </div><br/> --}}
+                </div><br/>
                 <div class="bg-white-200">
                     <button type="submit"
                         class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-dark-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2  dark:hover:bg-dark-green-700 ">Create</button>
