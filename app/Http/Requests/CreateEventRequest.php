@@ -31,7 +31,8 @@ class CreateEventRequest extends FormRequest
             'num_of_tickets' => 'required',
             'description' => 'required',
             'city_id' => 'required',
-            'country_id' => 'required'
+            'country_id' => 'required',
+            'tags' => 'required | exists:tags,id'
         ];
     }
 }

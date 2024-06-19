@@ -18,7 +18,8 @@ class EventController extends Controller
      */
     public function index() : View
     {
-        return view('events.index');
+        $events = Event::all();
+        return view('events.index',compact('events'));
     }
 
     /**
@@ -43,7 +44,8 @@ class EventController extends Controller
             $data['user_id'] = auth()->id();
             $data['slug'] = Str::slug($request->title);
 
-            Event::create($data);
+            $event = Event::create($data);
+            $event->tags()->attach($request->tags);
             return redirect(route('events.index'))->with('message','Event Added Successfully!');
         }
         else{
