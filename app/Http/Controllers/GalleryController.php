@@ -97,8 +97,13 @@ class GalleryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Gallery $gallery)
     {
-        //
+        $destination ='uploads/galleries/'.$gallery->image;
+            if(File::exists($destination)){
+                 File::delete($destination);
+            }
+        $gallery->delete();
+        return redirect(route('galleries.index'))->with('message','Gallery Deleted Successfully!');
     }
 }
