@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateGalleryRequest;
+use App\Models\Gallery;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Storage;
 
 class GalleryController extends Controller
 {
@@ -12,23 +16,36 @@ class GalleryController extends Controller
      */
     public function index() : View
     {
-        return view('galleries.index');
+        $galleries = Gallery::all();
+        return view('galleries.index',compact('galleries'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create():View
     {
-        //
+        return view('galleries.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
-    {
-        //
+    public function store(CreateGalleryRequest $request)
+    { 
+        if ($request->hasFile('image')) {
+            $data = $request->validated();
+
+                $data['caption'] = $request->input('caption');
+                $data['image'] = Storage::putFile('galleries',$request->file('image'));
+                $data['user_id'] = auth()->id();
+            
+            Gallery::create($data);
+
+            return to_route('galleries.index')->with('message','Gallery Added Successfully!');
+        }
+
+        return back();
     }
 
     /**
