@@ -95,8 +95,11 @@ class EventController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Event $event): RedirectResponse
     {
-        //
+       Storage::delete($event->image);
+       $event->tags()->detach();
+       $event->delete();
+       return redirect(route('events.index'))->with('message','Event Deleted Successfully!');
     }
 }
